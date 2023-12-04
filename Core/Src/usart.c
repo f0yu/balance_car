@@ -32,6 +32,7 @@ DMA_HandleTypeDef hdma_usart1_tx;
 
 /* USART1 init function */
 
+
 void MX_USART1_UART_Init(void)
 {
 

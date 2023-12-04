@@ -7,13 +7,15 @@
 
 
 //IO方向设置
-#define MPU_SDA_IN()  {GPIOB->CRL&=0XF0FFFFFF;GPIOB->CRL|=8<<24;}
-#define MPU_SDA_OUT() {GPIOB->CRL&=0XF0FFFFFF;GPIOB->CRL|=3<<24;}
+//#define MPU_SDA_IN()  {GPIOB->CRL&=0XF0FFFFFF;GPIOB->CRL|=8<<24;}
+//#define MPU_SDA_OUT() {GPIOB->CRL&=0XF0FFFFFF;GPIOB->CRL|=3<<24;}
 
+#define MPU_SDA_IN()  {GPIOB->CRL&=0X0FFFFFFF;GPIOB->CRL|=(uint32_t)8<<28;}
+#define MPU_SDA_OUT() {GPIOB->CRL&=0X0FFFFFFF;GPIOB->CRL|=(uint32_t)3<<28;}
 //IO操作函数	 
-#define MPU_IIC_SCL    PBout(7) 		//SCL
-#define MPU_IIC_SDA    PBout(6) 		//SDA
-#define MPU_READ_SDA   PBin(6) 		//输入SDA 
+#define MPU_IIC_SCL    PBout(6) 		//SCL
+#define MPU_IIC_SDA    PBout(7) 		//SDA
+#define MPU_READ_SDA   PBin(7) 		//输入SDA 
 
 
 
