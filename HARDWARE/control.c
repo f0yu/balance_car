@@ -93,7 +93,7 @@ int balance(float Angle ,float Gyro)
 {  
      float Bias;    //这里D为零
 	 int balancel;
-	 Bias=Angle-1;                          //===求出平衡的角度中值 和机械相关
+	 Bias=Angle;                          //===求出平衡的角度中值 和机械相关
 	 balancel=Balance_Kp*Bias+Balance_Kd*Gyro;      //===计算平衡控制的电机PWM 
 	 return balancel;
 }
@@ -176,6 +176,7 @@ void Set_Pwm(int moto1,int moto2)
 
 	    Final_Moto1=Linear_Conversion(moto1);  //线性化
     	Final_Moto2=Linear_Conversion(moto2);
+    printf("pwm:%d",moto2);
 }
 
 /**************************************************************************
@@ -183,19 +184,39 @@ void Set_Pwm(int moto1,int moto2)
 入口参数：PWM
 返回  值：线性化后的PWM
 **************************************************************************/
+//float Linear_Conversion(int moto)
+//{ 
+//	 float temp;
+//     float Linear_Moto;
+//    
+//        temp=36000000.0/(PRESCALER+1)/13000.0*(5000.0/myabs(moto));
+//	 if(temp>65535.0) Linear_Moto=65535.0;
+//	 else if(temp<0.0) Linear_Moto=0.0;
+//	 else Linear_Moto=temp;
+//    
+//	 return Linear_Moto;
+//}	
+
 float Linear_Conversion(int moto)
 { 
-	 float temp;
-     float Linear_Moto;
-    
-        temp=36000000.0/(PRESCALER+1)/13000.0*5000.0/myabs(moto);
-	 if(temp>65535.0) Linear_Moto=65535.0;
-	 else if(temp<0.0) Linear_Moto=0.0;
-	 else Linear_Moto=temp;
-	 return Linear_Moto;
+    uint16_t Linear_Moto;
+    moto = myabs(moto);
+    if(moto >65535)
+    {
+        moto = 65535;
+    }
+    Linear_Moto = 65535-moto;
+   return Linear_Moto;
+//	 float temp;
+//     float Linear_Moto;
+//    
+//        temp=36000000.0/(PRESCALER+1)/13000.0*(5000.0/myabs(moto));
+//	 if(temp>65535.0) Linear_Moto=65535.0;
+//	 else if(temp<0.0) Linear_Moto=0.0;
+//	 else Linear_Moto=temp;
+//    
+//	 return Linear_Moto;
 }	
-
-
 /**************************************************************************
 函数功能：绝对值函数
 入口参数：int
