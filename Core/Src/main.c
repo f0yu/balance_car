@@ -70,7 +70,8 @@ void SystemClock_Config(void);
 
 
 u8 Flag_Stop=1,Flag_Show=0;                 //停止标志位和 显示标志位 默认停止 显示打开
-float Balance_Kp=200,Balance_Kd=0,Velocity_Kp=70,Velocity_Ki=0.7;//PID参数
+
+float Balance_Kp=300,Balance_Kd=0,Velocity_Kp=0,Velocity_Ki=0;//PID参数
 
 int Moto1,Moto2,Final_Moto1,Final_Moto2;    //电机PWM变量 应是Motor的 向Moto致敬	
 int Zhongzhi,Flag_Zhongzhi=0;
@@ -123,7 +124,6 @@ int main(void)
   MX_TIM4_Init();
     
 
-       OLED_ShowNumber(0, 3, state,2,16);
  
   /* USER CODE BEGIN 2 */
 
@@ -138,7 +138,6 @@ int main(void)
    
     
     MPU_Init();
-    state=1;
     if(mpu_dmp_init() == 0) //如果返回值为0，表示MPU6050正常工作
     {
        OLED_ShowString(0,6,"MPU6050_Success!",8);
@@ -152,10 +151,10 @@ int main(void)
    OLED_ShowString(0,6,"MPU6050_Fail!",8);
 
     }
-//    
-//    HAL_Delay(3000);
-//    MX_TIM3_Init();
-  
+    
+    HAL_Delay(3000);
+    MX_TIM3_Init();
+    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn); // 启用特定的中断
 
 
 
@@ -168,7 +167,7 @@ int main(void)
     /* USER CODE END WHILE */
 
 
-//    run();
+        Get_Angle();
 
 
       

@@ -21,16 +21,16 @@ u8 MPU_Init(void)
     /***************************************************************************
     若不用中断，则取消注释下列四行
     ***************************************************************************/
-	MPU_Write_Byte(MPU_USER_CTRL_REG,0X00);	//I2C主模式关闭
-	MPU_Write_Byte(MPU_INT_EN_REG,0X00);	//关闭所有中断
-	MPU_Write_Byte(MPU_FIFO_EN_REG,0X00);	//关闭FIFO
-	MPU_Write_Byte(MPU_INTBP_CFG_REG,0X80);	//INT引脚低电平有效
+//	MPU_Write_Byte(MPU_USER_CTRL_REG,0X00);	//I2C主模式关闭
+//	MPU_Write_Byte(MPU_INT_EN_REG,0X00);	//关闭所有中断
+//	MPU_Write_Byte(MPU_FIFO_EN_REG,0X00);	//关闭FIFO
+//	MPU_Write_Byte(MPU_INTBP_CFG_REG,0X80);	//INT引脚低电平有效
 	
 	/***************************************************************************
       若使用中断，则取消注释下列两行
       ***************************************************************************/
-//    MPU_Write_Byte(MPU_INT_EN_REG,0X01);	//开启中断，0x00是关闭中断，0x01开启中断
-//	MPU_Write_Byte(MPU_INTBP_CFG_REG,0X80);	//INT引脚低电平有效
+    MPU_Write_Byte(MPU_INT_EN_REG,0X01);	//开启中断，0x00是关闭中断，0x01开启中断
+	MPU_Write_Byte(MPU_INTBP_CFG_REG,0X80);	//INT引脚低电平有效
 
 	if(res==MPU_ADDR)//器件ID正确
 	{
