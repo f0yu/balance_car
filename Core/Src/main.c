@@ -152,7 +152,7 @@ int main(void)
 
     }
     
-    HAL_Delay(3000);
+    HAL_Delay(2000);
     MX_TIM3_Init();
     HAL_NVIC_EnableIRQ(EXTI9_5_IRQn); // 启用特定的中断
 
