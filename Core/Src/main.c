@@ -70,7 +70,20 @@ void SystemClock_Config(void);
 
 
 u8 Flag_Stop=1,Flag_Show=0;                 //停止标志位和 显示标志位 默认停止 显示打开
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+float Balance_Kp=10000,Balance_Kd=0,Velocity_Kp=0,Velocity_Ki=0;//PID参数
+=======
 float Balance_Kp=200,Balance_Kd=0,Velocity_Kp=70,Velocity_Ki=0.7;//PID参数
+>>>>>>> parent of 3616136 (pid transplant)
+=======
+float Balance_Kp=200,Balance_Kd=0,Velocity_Kp=70,Velocity_Ki=0.7;//PID参数
+>>>>>>> parent of 3616136 (pid transplant)
+=======
+float Balance_Kp=200,Balance_Kd=0,Velocity_Kp=70,Velocity_Ki=0.7;//PID参数
+>>>>>>> parent of 3616136 (pid transplant)
 
 int Moto1,Moto2,Final_Moto1,Final_Moto2;    //电机PWM变量 应是Motor的 向Moto致敬	
 int Zhongzhi,Flag_Zhongzhi=0;
@@ -136,29 +149,45 @@ int main(void)
 //    OLED_ShowString(0,4,"roll",16);
 //    OLED_ShowString(0,6,"yaw",16);
    
-    uint8_t mpu_state = 0;
-//	mpu_state =   MPU_Init();
-	
-	mpu_state = mpu_dmp_init();
-	printf("mpu_state: %d\r\n",mpu_state);
-//    state=1;
-//    if(mpu_dmp_init() == 0) //如果返回值为0，表示MPU6050正常工作
-//    {
-//       OLED_ShowString(0,6,"MPU6050_Success!",8);
+    
+    MPU_Init();
+    state=1;
+    if(mpu_dmp_init() == 0) //如果返回值为0，表示MPU6050正常工作
+    {
+       OLED_ShowString(0,6,"MPU6050_Success!",8);
 
 
-//    }
-//    else //如果返回值不为0，表示MPU6050故障
-//    {
-//        //执行异常处理
+    }
+    else //如果返回值不为0，表示MPU6050故障
+    {
+        //执行异常处理
 
-//   OLED_ShowString(0,6,"MPU6050_Fail!",8);
+   OLED_ShowString(0,6,"MPU6050_Fail!",8);
 
-//    }
+    }
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    
+    HAL_Delay(2000);
+    MX_TIM3_Init();
+    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn); // 启用特定的中断
+=======
+=======
+>>>>>>> parent of 3616136 (pid transplant)
+=======
+>>>>>>> parent of 3616136 (pid transplant)
 //    
 //    HAL_Delay(3000);
 //    MX_TIM3_Init();
   
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 3616136 (pid transplant)
+=======
+>>>>>>> parent of 3616136 (pid transplant)
+=======
+>>>>>>> parent of 3616136 (pid transplant)
 
 
 
