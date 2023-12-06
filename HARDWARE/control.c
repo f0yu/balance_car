@@ -126,15 +126,21 @@ int balance(float Angle ,float Gyro)
 {  
      float Bias;    //这里D为零
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 int balancel;
 	 Bias=Angle;                          //===求出平衡的角度中值 和机械相关
 	 balancel=Balance_Kp*Bias+Balance_Kd*Gyro;      //===计算平衡控制的电机PWM 
 	 return balancel;
 =======
+=======
+>>>>>>> parent of 3616136 (pid transplant)
 	 int balance;
 	 Bias=Angle-Zhongzhi;                          //===求出平衡的角度中值 和机械相关
 	 balance=Balance_Kp*Bias+Balance_Kd*Gyro;      //===计算平衡控制的电机PWM 
 	 return balance;
+<<<<<<< HEAD
+>>>>>>> parent of 3616136 (pid transplant)
+=======
 >>>>>>> parent of 3616136 (pid transplant)
 }
 

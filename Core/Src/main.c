@@ -71,8 +71,12 @@ void SystemClock_Config(void);
 
 u8 Flag_Stop=1,Flag_Show=0;                 //停止标志位和 显示标志位 默认停止 显示打开
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 float Balance_Kp=10000,Balance_Kd=0,Velocity_Kp=0,Velocity_Ki=0;//PID参数
+=======
+float Balance_Kp=200,Balance_Kd=0,Velocity_Kp=70,Velocity_Ki=0.7;//PID参数
+>>>>>>> parent of 3616136 (pid transplant)
 =======
 float Balance_Kp=200,Balance_Kd=0,Velocity_Kp=70,Velocity_Ki=0.7;//PID参数
 >>>>>>> parent of 3616136 (pid transplant)
@@ -158,15 +162,21 @@ int main(void)
 
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     HAL_Delay(2000);
     MX_TIM3_Init();
     HAL_NVIC_EnableIRQ(EXTI9_5_IRQn); // 启用特定的中断
 =======
+=======
+>>>>>>> parent of 3616136 (pid transplant)
 //    
 //    HAL_Delay(3000);
 //    MX_TIM3_Init();
   
+<<<<<<< HEAD
+>>>>>>> parent of 3616136 (pid transplant)
+=======
 >>>>>>> parent of 3616136 (pid transplant)
 
 
