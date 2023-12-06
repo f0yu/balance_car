@@ -3023,6 +3023,7 @@ u8 mpu_dmp_init(void)
 
         MPU_IIC_Init(); 	//初始化IIC总线
         uint8_t temp[1]={0};
+                            state=5;
 
            i2cRead(0x68,0x75,1,temp);
 

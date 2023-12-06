@@ -1,5 +1,38 @@
 #include "control.h"
 
+int Balance_Pwm,Velocity_Pwm,Turn_Pwm;
+
+void run(void)
+{
+        Flag_Stop=0;
+        Get_Angle();                                               //===更新姿态	
+               
+        Balance_Pwm =balance(Angle_Balance,Gyro_Balance);         //===平衡控制	
+        Velocity_Pwm=velocity(Moto1,Moto2);                       //===速度环PI控制	 速度反馈是正反馈，就是小车快的时候要慢下来就需要再跑快一点    
+       
+    
+        Moto1=Balance_Pwm+Velocity_Pwm-Turn_Pwm;                  //===计算左轮电机最终PWM
+        Moto2=Balance_Pwm+Velocity_Pwm+Turn_Pwm;                  //===计算右轮电机最终PWM
+                
+        Xianfu_Pwm();
+        if(Turn_Off(Angle_Balance)==0)                                //===如果不存在异常
+        {
+            Set_Pwm(Moto1,Moto2);                                         //===赋值给PWM寄存器  
+
+        }
+        else
+        Set_Pwm(0,0);           
+        Get_Zhongzhi();		 
+//            printf("Angle_Balance：%2f\n\r",Angle_Balance);
+//            printf("Moto：%d,%d\n\r",Moto1,Moto2);
+//            printf("pwm“%d,%d\n\r",Balance_Pwm,Velocity_Pwm);
+
+    OLED_Float(1, 5, Angle_Balance,6);
+    OLED_ShowNumber(0, 2, Moto1,4,16);
+    OLED_ShowNumber(64, 2, Moto1,4,16);
+
+}
+
 
 
 
@@ -76,8 +109,8 @@ void Get_Angle(void)
 {
     
         Read_DMP();
-        Angle_Balance=-Roll;             //===更新平衡倾角
-        Gyro_Balance=gyro[0];             //===更新平衡角速度
+        Angle_Balance=-Pitch;             //===更新平衡倾角
+        Gyro_Balance=gyro[1];             //===更新平衡角速度
         Acceleration_Z=accel[2];         //===更新Z轴加速度计
 //        printf("Pitch: %f ,%f ，%f\n\r", Angle_Balance,Gyro_Balance,Acceleration_Z);
 
@@ -92,10 +125,17 @@ void Get_Angle(void)
 int balance(float Angle ,float Gyro)
 {  
      float Bias;    //这里D为零
+<<<<<<< HEAD
 	 int balancel;
 	 Bias=Angle;                          //===求出平衡的角度中值 和机械相关
 	 balancel=Balance_Kp*Bias+Balance_Kd*Gyro;      //===计算平衡控制的电机PWM 
 	 return balancel;
+=======
+	 int balance;
+	 Bias=Angle-Zhongzhi;                          //===求出平衡的角度中值 和机械相关
+	 balance=Balance_Kp*Bias+Balance_Kd*Gyro;      //===计算平衡控制的电机PWM 
+	 return balance;
+>>>>>>> parent of 3616136 (pid transplant)
 }
 
 /**************************************************************************
@@ -127,21 +167,21 @@ void  Get_Zhongzhi(void)
 u8 Turn_Off(float angle)
 {
     u8 temp;
-    if(angle<-40||angle>40)
+    if(angle<-40||angle>40||1==Flag_Stop)
         {	                                                 //===倾角大于40度关闭电机
             temp=1;                                            //===Flag_Stop置1关闭电机
             Moto1=0;
             Moto2=0;		
-            EN=1;	
+            EN=0;	
+            
+            if(angle<-75||angle>75)                            //小车摔倒 停止标志位置1
             Flag_Stop=1;
-        HAL_TIM_OC_Stop_IT(&htim3,TIM_CHANNEL_1);
-        HAL_TIM_OC_Stop_IT(&htim3,TIM_CHANNEL_2);
 
         }
     else
     {	
         temp=0;
-        EN=0;	
+        EN=1;	
     }
     return temp;
 }

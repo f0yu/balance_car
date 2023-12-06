@@ -285,5 +285,10 @@ void USART1_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+//void EXTI9_5_IRQHandler(void)
+//{
 
+//    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+//}
 /* USER CODE END 1 */
